@@ -1,0 +1,20 @@
+# Ignore Python virtual environment
+venv/
+
+# Ignore training data and models
+data/
+models/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Node modules (frontend)
+frontend/node_modules/
+build/
+dist/
+
+# System files
+.DS_Store
+Thumbs.db
