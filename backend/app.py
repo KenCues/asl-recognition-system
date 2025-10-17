@@ -24,7 +24,15 @@ from collections import deque
 import time
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resource={
+    r"/api/*": {
+        "origins": [
+            "http://localhost:3000",
+            "https://learn2Sign.onrender.com", 
+            "https://*.onrender.com"
+        ]
+    }
+})
 
 
 mp_holistic = mp.solutions.holistic
