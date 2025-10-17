@@ -1,3 +1,11 @@
+import os
+import warnings
+
+# Suppress TensorFlow warnings and disable GPU
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+warnings.filterwarnings('ignore', category=DeprecationWarning)
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import cv2
@@ -584,8 +592,9 @@ def collect_sequence_data():
         })
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 400
+load_actions()
+load_model_if_exists()
 
 if __name__ == '__main__':
-    load_actions()
-    load_model_if_exists()
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
